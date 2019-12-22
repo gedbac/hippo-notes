@@ -1,0 +1,67 @@
+{
+  "name": "hippo-notes",
+  "description": "A tool which helps manage daily routines easier",
+  "keywords": [
+    "productivity",
+    "notes",
+    "todo"
+  ],
+  "version": "1.0.0",
+  "author": "Gediminas Bačkevičius <gediminas.backevicius@gmail.com>",
+  "license": "AGPL-3.0",
+  "main": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gedbac/hippo-notes.git"
+  },
+  "engines": {
+    "node": ">=12.14.0"
+  },
+  "scripts": {
+    "develop": "yarn develop-webapp",
+    "develop-webapp": "./node_modules/.bin/webpack-dev-server --config webapp.config.js --mode development",
+    "build": "yarn build-specs && yarn build-webapp && yarn build-streaming-service",
+    "build-specs": "./node_modules/.bin/webpack --config spec.config.js --mode development",
+    "build-webapp": "./node_modules/.bin/webpack --config webapp.config.js --mode development",
+    "build-streaming-service": "./node_modules/.bin/webpack --config streaming-service.config.js --mode development",
+    "build-containers": "docker-compose --project-name hippo build",
+    "start-containers": "docker-compose --project-name hippo up -d",
+    "run-node-spec": "cd ./dist/spec/node && ../../../node_modules/mocha/bin/_mocha ./hippo-infrastructure.spec.js",
+    "run-web-spec": "cd ./dist/spec/web && ../../../node_modules/mocha-headless-chrome/bin/start -f ./spec-runner.html -a no-sandbox"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "babel-loader": "^8.0.6",
+    "chai": "^4.2.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^3.4.0",
+    "eslint": "^6.8.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-react": "^7.17.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "mocha": "^6.2.2",
+    "mocha-headless-chrome": "^2.0.3",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "sinon": "^8.0.0",
+    "style-loader": "^1.1.1",
+    "webpack": "^4.41.4",
+    "webpack-cleanup-plugin": "^0.5.1",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.7.1",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-compress": "^3.0.0",
+    "koa-logger": "^3.2.1",
+    "koa-response-time": "^2.1.0",
+    "koa-router": "^7.4.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}
