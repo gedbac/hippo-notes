@@ -19,18 +19,42 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+/*
 import Startup from "./startup";
 import DependencyInjection from "./shared/dependency-injection";
 import Application from "./components/application";
-import "../css/style";
+*/
+import { grid4pt, grid8pt } from "./components/grid-8pt";
+import theme from "./components/theme"; 
+import StyleguideView from "./components/styleguide-view";
 
+/*
 var serviceProvider = new Startup()
   .configure()
   .createServiceProvider();
 
 var WrappedApplication = DependencyInjection.inject(Application, serviceProvider);
+*/
+
+const Style = createGlobalStyle`
+  body, html, #viewport {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 400;
+  }
+  ${grid4pt}
+  ${grid8pt}
+`;
 
 ReactDOM.render(
-  <WrappedApplication />,
+  //<WrappedApplication />,
+  <ThemeProvider theme={theme}>
+    <Style />
+    <StyleguideView />
+  </ThemeProvider>,
   document.getElementById("viewport")
 );
